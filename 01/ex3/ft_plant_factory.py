@@ -1,0 +1,25 @@
+class Plant:
+    def __init__(self, name, height, age):
+        self.name = name
+        self.age = age
+        self.height = height
+    def get_info(self):
+        print(f"Created: {self.name} ({self.height}cm, {self.age} days)")
+
+print("=== Plant Factory Output ===")
+list_plants = [ 
+    ("Rose", 25, 30),
+    ("Oak", 200, 365),
+    ("Cactus", 5, 90),
+    ("Sunflower", 80, 45),
+    ("Fern", 15, 120)
+]
+
+plants = []
+
+for data in list_plants:
+    plant = Plant(data[0], data[1], data[2])
+    plants.append(plant)
+    plant.get_info()
+
+print(f"Total plants created: {len(plants)}")
