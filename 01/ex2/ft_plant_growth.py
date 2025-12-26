@@ -13,7 +13,6 @@ class Plant:
 rose = Plant("Rose", 30, 25)
 i = 1
 week = 7
-growth = week - i
 print("=== Day 1 ===")
 rose.get_info()
 initial_height = rose.height
