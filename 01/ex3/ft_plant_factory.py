@@ -7,7 +7,7 @@ class Plant:
         print(f"Created: {self.name} ({self.height}cm, {self.age} days)")
 
 print("=== Plant Factory Output ===")
-list_plants = [ 
+list_plants = [      #creo una estructura de datos. cada elemento es una tupla. no se pueden modificar
     ("Rose", 25, 30),
     ("Oak", 200, 365),
     ("Cactus", 5, 90),
@@ -18,7 +18,7 @@ list_plants = [
 plants = []
 
 for data in list_plants:
-    plant = Plant(data[0], data[1], data[2])
+    plant = Plant(data[0], data[1], data[2])  #llamo a los datos 1,2 y 3 de las tuplas
     plants.append(plant)
     plant.get_info()
 
