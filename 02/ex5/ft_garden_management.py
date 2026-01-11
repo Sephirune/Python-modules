@@ -30,7 +30,6 @@ class GardenManager:
             try:
                 water = data["water"]
                 sun = data["sun"]
-
                 if water > 10:
                     raise ValueError(f"Water level {water} is too high (max 10)")
                 print(f"{plant}: healthy (water: {water}, sun: {sun})")
