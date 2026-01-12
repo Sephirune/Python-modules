@@ -16,9 +16,9 @@ class Flower(Plant):
         return f"{self.name}: {self.height}cm, {self.age} days, {self.color} color"
 
 class Tree(Plant):
-    def __init__(self, name, height, age, trunk_dinameter):
+    def __init__(self, name, height, age, trunk_diameter):
         super().__init__(name, height, age)
-        self.trunk_dinameter = trunk_dinameter
+        self.trunk_diameter = trunk_diameter
     def produce_shade(self):
         shade_area = self.height * 0,7
         print(f"{self.name}: {self.height}cm, {self.age} days, {self.produce_shade} diameter")
@@ -29,7 +29,7 @@ class Vegetable(Plant):
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
 
-    def nutrition(self)
+    def nutrition(self):
         print(f"{self.name} is rich in {self.nutritional_value}")
     def get_info(self):
         return f"{self.name} (vegetable): {self.height}cm, {self.age} days, {self.harvest_season} harvest"
