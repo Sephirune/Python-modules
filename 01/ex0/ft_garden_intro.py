@@ -7,4 +7,4 @@ if __name__ == "__main__":
     print(f"Plant: {name}")
     print(f"Height: {height}")
     print(f"Age: {age}")
-    print("=== End of Program ===")
+    print("\n=== End of Program ===")
