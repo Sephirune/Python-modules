@@ -1,4 +1,3 @@
-import sys
 import math
 
 position = (10, 20, 5)
@@ -29,11 +28,11 @@ print(f"Distance between {point1} and {parsed_position}: {distance2}")
 invalid_cords = "abc,def,ghi"
 print(f"\nParsing invalid cordinates: {invalid_cords}")
 try:
-	parse_cord = invalid_cords.split(",")
-	x = int(parse_cord[0])
-	y = int(parse_cord[1])
-	z = int(parse_cord[2])
-	invalid_parsed = (x, y, z)
+    parse_cord = invalid_cords.split(",")
+    x = int(parse_cord[0])
+    y = int(parse_cord[1])
+    z = int(parse_cord[2])
+    invalid_parsed = (x, y, z)
 except ValueError as e:
     print(f"Error parsing coordinates: {e}")
     print(f"Error details - Type: ValueError, Args: {e.args}")
