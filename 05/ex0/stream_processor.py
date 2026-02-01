@@ -17,12 +17,12 @@ class DataProcessor(ABC):
 
 class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        if not isinstance(data, list):
+        try:
+            for x in data:
+                _ = x + 1
+            return True
+        except Exception:
             return False
-        for i in data:
-            if not isinstance(i, (int, float)):
-                return False
-        return True
 
     def process(self, data: Any) -> str:
         try:
@@ -40,7 +40,11 @@ avg={average}"
 
 class TextProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        return isinstance(data, str)
+        try:
+            data.split()
+            return True
+        except Exception:
+            return False
 
     def process(self, data: Any) -> str:
         try:
@@ -57,7 +61,11 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        return isinstance(data, str)
+        try:
+            _ = "ERROR" in data
+            return True
+        except Exception:
+            return False
 
     def process(self, data: Any) -> str:
         try:
