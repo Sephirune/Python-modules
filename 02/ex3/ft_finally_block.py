@@ -1,4 +1,7 @@
-def water_plants(plant_list):
+from typing import List, Optional
+
+
+def water_plants(plant_list: List[Optional[str]]) -> None:
     try:
         print("Opening watering system")
         for plant in plant_list:
@@ -10,16 +13,18 @@ def water_plants(plant_list):
     finally:
         print("Closing watering system (cleanup)")
 
-def test_watering_system():
+
+def test_watering_system() -> None:
     print("=== Garden Watering System ===\n")
     print("Testing normal watering...")
     water_plants(["tomato", "lettuce", "carrots"])
     print("Watering completed successfully!\n")
-    
+
     print("Testing with error...")
     water_plants(["tomato", None, "carrots"])
-    
+
     print("\nCleanup always happens, even with errors!")
-    
+
+
 if __name__ == "__main__":
     test_watering_system()

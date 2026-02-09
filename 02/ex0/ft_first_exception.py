@@ -1,7 +1,7 @@
 def check_temperature(temp_str):
-    try: # intenta hacer esto
+    try:
         temp = int(temp_str)
-    except ValueError: # pilla el error y evita que se crashee
+    except ValueError:
         print(f"Testing Temperature: {temp_str}")
         print(f"Error: '{temp_str}' is not a valid number\n")
         return
