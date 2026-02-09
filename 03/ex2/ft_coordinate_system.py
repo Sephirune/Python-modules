@@ -1,4 +1,5 @@
 import math
+from typing import Tuple
 
 position = (10, 20, 5)
 point1 = (0, 0, 0)
@@ -25,14 +26,14 @@ x2, y2, z2 = parsed_position
 distance2 = math.sqrt((x2-x1) ** 2 + (y2-y1) ** 2 + (z2-z1) ** 2)
 print(f"Distance between {point1} and {parsed_position}: {distance2}")
 
-invalid_cords = "abc,def,ghi"
+invalid_cords: str = "abc,def,ghi"
 print(f"\nParsing invalid cordinates: {invalid_cords}")
 try:
     parse_cord = invalid_cords.split(",")
-    x = int(parse_cord[0])
-    y = int(parse_cord[1])
-    z = int(parse_cord[2])
-    invalid_parsed = (x, y, z)
+    x: int = int(parse_cord[0])
+    y: int = int(parse_cord[1])
+    z: int = int(parse_cord[2])
+    invalid_parsed: Tuple[int, int, int] = (x, y, z)
 except ValueError as e:
     print(f"Error parsing coordinates: {e}")
     print(f"Error details - Type: ValueError, Args: {e.args}")

@@ -1,15 +1,17 @@
 import sys
+from typing import Dict, List
+
 print("=== Inventory System Analysis ===")
-items = {}
+items: Dict = {}
 for arg in sys.argv[1:]:
-    parse = arg.split(":")
+    parse: List[str] = arg.split(":")
     item = parse[0]
-    quantity = int(parse[1])
+    quantity: int = int(parse[1])
     items[item] = quantity
 total_items = 0
 for quantity in items.values():
     total_items += quantity
-unique_type = len(items)
+unique_type: int = len(items)
 print(f"Total items in inventory: {total_items}")
 print(f"Unique item types: {unique_type}")
 
