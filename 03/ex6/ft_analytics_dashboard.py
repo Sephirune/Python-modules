@@ -13,6 +13,7 @@ total_players: int = len(players)
 total_archievements: int = len(archievements)
 
 score: int = 0
+name: str
 for name in players_scores:
     score += players_scores[name]
 total_score: int = sum([players_scores[name] for name in players_scores])

@@ -7,6 +7,9 @@ if len(sys.argv) < 2:
 else:
     print("Program name: ft_command_quest.py")
     print(f"Arguments received: {len(sys.argv) - 1}")
-    for i, arg in enumerate(sys.argv[1:]):
-        print(f"Argument {i + 1}: {arg}")
+    i: int = 1
+    arg: str
+    for arg in sys.argv[1:]:
+        print(f"Argument {i}: {arg}")
+        i += 1
     print(f"Total arguments: {len(sys.argv)}")

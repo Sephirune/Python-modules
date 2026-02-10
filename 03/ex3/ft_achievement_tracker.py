@@ -1,7 +1,7 @@
 from typing import Set
 
 
-def arch_hunter():
+def arch_hunter() -> None:
     print("=== Achievement Tracker System ===\n")
 
     archievement: Set[str] = set(['boss_slayer', 'collector',

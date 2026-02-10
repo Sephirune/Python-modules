@@ -5,9 +5,10 @@ def generate_game_events(n: int) -> Generator[Tuple[str, int, str], None,
                                               None]:
     names: List[str] = ["alice", "bob", "charlie", "kenny", "mickey"]
     actions: List[str] = ["killed monster", "found treasure", "leveled up"]
+    i: int
     for i in range(n):
         name: str = names[i % len(names)]
-        level: int = (i % 10) + 1
+        level: int = i * 6
         action: str = actions[i % len(actions)]
         event: Tuple[str, int, str] = ((name), (level), (action))
         yield event
@@ -21,6 +22,7 @@ total: int = 0
 treasure: int = 0
 levelup: int = 0
 high_level: int = 0
+event: Tuple[str, int, str]
 for event in events:
     event_text: str = event[0]
     level: int = event[1]
@@ -48,7 +50,7 @@ print("Processing time: 0.045 seconds")
 print("\n=== Generator Demonstration ===")
 
 
-def fibonacci_gen():
+def fibonacci_gen() -> Generator[int, None, None]:
     a: int = 0
     b: int = 1
     yield a
@@ -64,7 +66,8 @@ def prime_gen() -> Generator[int, None, None]:
     yield 2
     a: int = 3
     while True:
-        is_prime = True
+        is_prime: bool = True
+        i: int
         for i in range(2, a):
             if a % i == 0:
                 is_prime = False
@@ -76,10 +79,11 @@ def prime_gen() -> Generator[int, None, None]:
 
 fib: Generator[int, None, None] = fibonacci_gen()
 fib_seq: List[int] = []
+i: int
 for i in range(10):
     fib_seq.append(next(fib))
 
-fib_str = ""
+fib_str: str = ""
 for i in range(len(fib_seq)):
     fib_str += str(fib_seq[i])
     if i < len(fib_seq) - 1:
@@ -91,7 +95,7 @@ prim_seq: List[int] = []
 for i in range(5):
     prim_seq.append(next(prim))
 
-prim_str = ""
+prim_str: str = ""
 for i in range(len(prim_seq)):
     prim_str += str(prim_seq[i])
     if i < len(prim_seq) - 1:
