@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..ex0 import Card
+from ex0.Card import Card
 
 
 class CardFactory(ABC):
@@ -20,5 +20,5 @@ class CardFactory(ABC):
         pass
 
     @abstractmethod
-    def get_suppported_types(self) -> dict:
+    def get_supported_types(self) -> dict:
         pass
