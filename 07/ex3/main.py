@@ -8,13 +8,13 @@ def main():
 
     print("\nConfiguring Fantasy Card Game...")
 
-    factory = FantasyCardFactory()
-    strategy = AggressiveStrategy()
+    factory: FantasyCardFactory = FantasyCardFactory()
+    strategy: AggressiveStrategy = AggressiveStrategy()
 
-    engine = GameEngine()
+    engine: GameEngine = GameEngine()
     engine.configure_engine(factory, strategy)
 
-    print(f"Factory: {factory.__class__.__name__}")
+    print(f"Factory: {type(factory).__name__}")
     print(f"Strategy: {strategy.get_strategy_name()}")
     print(f"Available types: {factory.get_supported_types()}")
 
