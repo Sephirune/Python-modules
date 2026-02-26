@@ -22,3 +22,12 @@ class CardFactory(ABC):
     @abstractmethod
     def get_supported_types(self) -> dict:
         pass
+
+
+class BasicCard(Card):
+
+    def play(self, game_state: dict) -> dict:
+        return {
+            "played": self.name,
+            "effect": "basic effect"
+        }

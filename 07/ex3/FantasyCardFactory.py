@@ -1,6 +1,7 @@
 import random
 from ex3.CardFactory import CardFactory
 from ex0.Card import Card
+from ex3.CardFactory import BasicCard
 
 
 class FantasyCardFactory(CardFactory):
@@ -12,7 +13,7 @@ class FantasyCardFactory(CardFactory):
 
     def create_creature(self, name_or_power=None) -> Card:
         name = random.choice(self.creatures)
-        return Card(name, random.randint(1, 5))
+        return BasicCard(name, random.randint(1, 5), "common")
 
     def create_spell(self, name_or_power=None) -> Card:
         name = random.choice(self.spells)

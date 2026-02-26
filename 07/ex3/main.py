@@ -4,9 +4,9 @@ from ex3.AggresiveStrategy import AggressiveStrategy
 
 
 def main():
-    print("=== DataDeck Game Engine ===")
+    print("\n=== DataDeck Game Engine ===")
 
-    print("Configuring Fantasy Card Game...")
+    print("\nConfiguring Fantasy Card Game...")
 
     factory = FantasyCardFactory()
     strategy = AggressiveStrategy()
@@ -29,7 +29,8 @@ def main():
     print("\nGame Report:")
     print(engine.get_engine_status())
 
-    print("\nAbstract Factory + Strategy Pattern: Maximum flexibility achieved!")
+    print("\nAbstract Factory + Strategy Pattern: Maximum flexibility \
+achieved!")
 
 
 if __name__ == "__main__":

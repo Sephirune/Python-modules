@@ -6,11 +6,11 @@ class AggressiveStrategy(GameStrategy):
         damage = 0
         cards_played = []
         for card in hand:
-            cards_played.append(card)
-            damage += getattr(card, "power", 0)
+            cards_played.append(card.name)
+            damage += getattr(card, "cost", 0)
 
         return {
-            'Strategy': self.get_strategy_name(),
+            'strategy': self.get_strategy_name(),
             'cards_played': cards_played,
             'damage_dealt': damage
             }

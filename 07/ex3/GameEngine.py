@@ -26,4 +26,5 @@ class GameEngine:
             "turns_simulated": self.turns_simulated,
             "strategy_used": self.strategy.get_strategy_name(),
             "total_damage": self.total_damage,
+            "cards_created": len(self.factory.create_themed_deck(3)["deck"])
         }
