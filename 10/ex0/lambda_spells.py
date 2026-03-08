@@ -14,7 +14,7 @@ def mage_stats(mages: list[dict]) -> dict:
     maximum_power = max(mages, key=lambda z: z["power"])["power"]
     useless_mage = min(mages, key=lambda u: u["power"])["power"]
     quick_math = sum(map(lambda s: s["power"], mages))
-    avg = round(quick_math / len(mages, 2))
+    avg = round(quick_math / len(mages), 2)
 
     return {
         "max_power": maximum_power,
@@ -44,6 +44,18 @@ def main():
     transformed_spells = spell_transformer(spells)
     print(f"{transformed_spells[0]}{transformed_spells[1]}\
 {transformed_spells[2]}")
+
+    mage_list = [
+        {"name": "Veigar", "power": 1081},
+        {"name": "Skidoodle", "power": 1000},
+        {"name": "Peter the mage", "power": 0}
+
+    ]
+    mage_rank = mage_stats(mage_list)
+    print("\nTesting mage ranking...")
+    print(f"Most Powerful Mage: {mage_rank['max_power']}")
+    print(f"Most useless mage of all time: {mage_rank['min_power']}")
+    print(f"Average of power: {mage_rank['avg_power']}")
 
 
 if __name__ == "__main__":
