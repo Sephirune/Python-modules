@@ -49,8 +49,8 @@ def main():
         {"name": "Veigar", "power": 1081},
         {"name": "Skidoodle", "power": 1000},
         {"name": "Peter the mage", "power": 0}
+        ]
 
-    ]
     mage_rank = mage_stats(mage_list)
     print("\nTesting mage ranking...")
     print(f"Most Powerful Mage: {mage_rank['max_power']}")
