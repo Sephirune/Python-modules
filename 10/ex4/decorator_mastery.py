@@ -13,7 +13,7 @@ def spell_timer(func: callable) -> callable:
         end = time.time()
         print(f"Spell completed in {round(end - start, 3)} seconds")
         return tracker
-    
+
     return wrapper
 
 
@@ -25,38 +25,62 @@ def power_validator(min_power: int) -> callable:
                 return "Insufficient power for this spell"
             else:
                 return func(self, spell_name, power)
-            
-        return wrapper
-        
-    return cast_spell
 
+        return wrapper
+
+    return cast_spell
 
 
 def retry_spell(max_attempts: int) -> callable:
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs) -> str:
-            tries = 1
-            try:
-                return func(max_attempts)
-            except:
-                for tries in max_attempts:
-                    if tries < max_attempts:
-                        print(f"Spell failed, retrying... (attempt {tries}/{max_attempts})")
+            for attempt in range(1, max_attempts):
+                try:
+                    return func(*args, **kwargs)
+                except Exception:
+                    if attempt < max_attempts:
+                        print(f"Spell failed, retrying... \
+(attempt {attempt}/{max_attempts})")
                     else:
-                        return f"Spell casting failed after {max_attempts} attempts"
-            return wrapper
-        return decorator
+                        return f"Spell casting failed after {max_attempts} \
+attempts"
+        return wrapper
+
+    return decorator
+
 
 class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        if len(name) < 3 and name.isalpha():
+        if len(name) >= 3 and all(n.isalpha() or n.isspace() for n in name):
             return True
         else:
             return False
-    
 
-    @staticmethod
-    @cast_spell(min_power=10)
+    @power_validator(min_power=10)
     def cast_spell(self, spell_name: str, power: int) -> str:
+        return f"Successfully cast {spell_name} with {power} power"
+
+
+def main():
+    print("Testing spell timer...")
+
+    @spell_timer
+    def fireball():
+        time.sleep(0.1)
+        return "Fireball cast!"
+
+    result = fireball()
+    print(f"Result: {result}\n")
+
+    print("Testing MageGuild...")
+    guild = MageGuild()
+    print(guild.validate_mage_name("Merlin"))
+    print(guild.validate_mage_name("Al"))
+    print(guild.cast_spell("Lightning", 15))
+    print(guild.cast_spell("Fire", 5))
+
+
+if __name__ == "__main__":
+    main()
