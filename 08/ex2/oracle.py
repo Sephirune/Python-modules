@@ -3,11 +3,11 @@ import sys
 from dotenv import load_dotenv
 
 
-def load_conf() -> list:
+def load_conf() -> dict[str, str | None]:
     print("ORACLE STATUS: Reading the Matrix...\n")
     load_dotenv()  # Carga el archivo env
 
-    config = {
+    config: dict[str, str | None] = {
         "Mode": os.getenv("MATRIX_MODE"),
         "Database": os.getenv("DATABASE_URL"),
         "API Access": os.getenv("API_KEY"),
@@ -17,10 +17,10 @@ def load_conf() -> list:
     return config
 
 
-def validate_conf(config) -> bool:
+def validate_conf(config: dict[str, str | None]) -> bool:
     print("Configuration loaded:\n")
 
-    warning = False
+    warning: bool = False
     for key, value in config.items():
         if not value:
             print(f"[WARNING] {key} is not configured")
@@ -33,7 +33,7 @@ def validate_conf(config) -> bool:
     return True
 
 
-def status(config) -> None:
+def status(config: dict[str, str | None]) -> None:
     print(f"Mode: {config['Matrix_Mode']}")
 
     if config["Mode"] == "development":
@@ -67,7 +67,7 @@ def checker() -> None:
 
 
 def main() -> None:
-    config = load_conf()
+    config: dict[str, str | None] = load_conf()
 
     if not validate_conf(config):
         print("\nPlease configure your environment variables.")
@@ -77,4 +77,6 @@ def main() -> None:
     checker
     print("\nThe Oracle sees all configurations.")
 
-main()
+
+if __name__ == "__main__":
+    main()

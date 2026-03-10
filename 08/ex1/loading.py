@@ -1,23 +1,24 @@
 import importlib
+from types import ModuleType
 
 
-requirements = [
+requirements: list[str] = [
     "pandas",
     "matplotlib",
     "numpy",
 ]
 
 
-def checker() -> list:
+def checker() -> dict[str, ModuleType]:
     print("LOADING STATUS: Loading programs...\n")
     print("Checking dependencies:")
 
-    loaded_modules = {}
+    loaded_modules: dict[str, ModuleType] = {}
 
     for pkg in requirements:
         try:
-            module = importlib.import_module(pkg)
-            version = getattr(module, "__version__", "unknown_ver")
+            module: ModuleType = importlib.import_module(pkg)
+            version: str = getattr(module, "__version__", "unknown_ver")
             print(f"[OK] {pkg} ({version}) - ready")
             loaded_modules[pkg] = module
 
@@ -28,7 +29,7 @@ def checker() -> list:
     return loaded_modules
 
 
-def analyze_matrix():
+def analyze_matrix() -> None:
     import matplotlib.pyplot as plt
     import pandas as pd
     import numpy as np
@@ -52,7 +53,7 @@ def analyze_matrix():
     print("Results saved to: matrix_analysis.png")
 
 
-def main():
+def main() -> None:
     modules = checker()
     if len(modules) < len(requirements):
         return

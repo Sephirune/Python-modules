@@ -3,14 +3,14 @@ import os
 import site
 
 
-def checker():
+def checker() -> int:
     if sys.prefix != sys.base_prefix:
         return 1
     else:
         return 0
 
 
-def sys_info():
+def sys_info() -> None:
     print("MATRIX STATUS: You're still plugged in")
     print(f"\nCurrent Python: {sys.executable}")
     print("Virtual Environment: None detected")
@@ -26,9 +26,9 @@ def sys_info():
      )
 
 
-def in_env():
-    env_path = sys.prefix
-    env_name = os.path.basename(sys.prefix)
+def in_env() -> None:
+    env_path: str = sys.prefix
+    env_name: str = os.path.basename(sys.prefix)
     print("MATRIX STATUS: Welcome to the construct\n")
     print(f"Current Python: {sys.executable}")
     print(f"Virtual Environment: {env_path}")
@@ -41,11 +41,11 @@ def in_env():
         )
 
     print("Package installation path:")
-    path = site.getsitepackages()
+    path: list[str] = site.getsitepackages()
     print(path[0])
 
 
-def main():
+def main() -> None:
     if checker():
         in_env()
     else:
