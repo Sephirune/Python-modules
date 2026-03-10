@@ -3,7 +3,7 @@ import operator
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
-    parse_type = {
+    parse_type: dict[str, callable] = {
         "add": operator.add,
         "multiply": operator.mul,
         "max": max,
@@ -15,9 +15,9 @@ def spell_reducer(spells: list[int], operation: str) -> int:
 
 def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
 
-    fire = partial(base_enchantment, 50, "fire")
-    ice = partial(base_enchantment, 50, "ice")
-    lightning = partial(base_enchantment, 50, "lightning")
+    fire: callable = partial(base_enchantment, 50, "fire")
+    ice: callable = partial(base_enchantment, 50, "ice")
+    lightning: callable = partial(base_enchantment, 50, "lightning")
 
     return {
         "fire_enchant": fire,
@@ -36,31 +36,31 @@ def memoized_fibonacci(n: int) -> int:
 
 def spell_dispatcher() -> callable:
     @singledispatch
-    def spell(value):
+    def spell(value: object) -> str:
         return "Unknown spell"
 
     @spell.register
-    def _(value: int):
+    def _(value: int) -> str:
         return f"Damage spell: {value}"
 
     @spell.register
-    def _(value: str):
+    def _(value: str) -> str:
         return f"Enchantment: {value}"
 
     @spell.register
-    def _(value: list):
+    def _(value: list) -> str:
         return f"Multi-cast: {value}"
 
     return spell
 
 
-def main():
+def main() -> None:
 
     print("\nTesting spell reducer...")
-    list_spells = [10, 20, 30, 40]
-    reduced = spell_reducer(list_spells, "add")
-    mult = spell_reducer(list_spells, "multiply")
-    maxi = spell_reducer(list_spells, "max")
+    list_spells: list[int] = [10, 20, 30, 40]
+    reduced: int = spell_reducer(list_spells, "add")
+    mult: int = spell_reducer(list_spells, "multiply")
+    maxi: int = spell_reducer(list_spells, "max")
 
     print(f"Sum: {reduced}")
     print(f"Product: {mult}")
@@ -68,8 +68,8 @@ def main():
 
     print("\nTesting memoized fibonacci...")
 
-    fibo = memoized_fibonacci(10)
-    fibo2 = memoized_fibonacci(15)
+    fibo: int = memoized_fibonacci(10)
+    fibo2: int = memoized_fibonacci(15)
 
     print(f"Fib(10): {fibo}")
     print(f"Fib(15): {fibo2}")

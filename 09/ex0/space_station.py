@@ -54,4 +54,5 @@ def main() -> None:
         print(e.errors()[0]["msg"])
 
 
-main()
+if __name__ == "__main__":
+    main()

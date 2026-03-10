@@ -1,7 +1,10 @@
-def mage_counter() -> callable:
-    counter = 0
+from typing import Any
 
-    def count():
+
+def mage_counter() -> callable:
+    counter: int = 0
+
+    def count() -> int:
         nonlocal counter
         counter += 1
         return counter
@@ -10,9 +13,9 @@ def mage_counter() -> callable:
 
 
 def spell_accumulator(initial_power: int) -> callable:
-    init = initial_power
+    init: int = initial_power
 
-    def charge_power(x):
+    def charge_power(x: int):
         nonlocal init
         init += x
         return init
@@ -21,34 +24,34 @@ def spell_accumulator(initial_power: int) -> callable:
 
 
 def enchantment_factory(enchantment_type: str) -> callable:
-    def enchant(item_name):
+    def enchant(item_name: str) -> str:
         return f"{enchantment_type} {item_name}"
 
     return enchant
 
 
 def memory_vault() -> dict[str, callable]:
-    memory = {}
+    memory: dict[str, Any] = {}
 
-    def store(key, value):
+    def store(key: str, value: Any) -> None:
         memory[key] = value
 
-    def recall(key):
+    def recall(key: str) -> Any:
         return memory.get(key, "Memory not found")
 
     return memory
 
 
-def main():
+def main() -> None:
     print("\nTesting mage counter...")
-    counter = mage_counter()
+    counter: callable = mage_counter()
     print("Call 1:", counter())
     print("Call 2:", counter())
     print("Call 3:", counter())
 
     print("\nTesting enchantment factory...")
-    sword_ench = enchantment_factory("Flaming")
-    shield_ench = enchantment_factory("Frozen")
+    sword_ench: callable = enchantment_factory("Flaming")
+    shield_ench: callable = enchantment_factory("Frozen")
     print(sword_ench("sword"))
     print(shield_ench("shield"))
 

@@ -5,7 +5,7 @@ from typing import Optional
 
 
 class ContactType(str, Enum):
-    radio = "radio",
+    radio = "radio"
     visual = "visual",
     physical = "physical",
     telepathic = "telepathic"
@@ -37,7 +37,7 @@ witnesses")
         return self
 
 
-def main():
+def main() -> None:
     print(
         'Alien Contact Log Validation',
         '\n======================================',
@@ -78,4 +78,5 @@ def main():
         print(e.errors()[0]["msg"])
 
 
-main()
+if __name__ == "__main__":
+    main()

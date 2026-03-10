@@ -11,10 +11,10 @@ def spell_transformer(spells: list[str]) -> list[str]:
 
 
 def mage_stats(mages: list[dict]) -> dict:
-    maximum_power = max(mages, key=lambda z: z["power"])["power"]
-    useless_mage = min(mages, key=lambda u: u["power"])["power"]
-    quick_math = sum(map(lambda s: s["power"], mages))
-    avg = round(quick_math / len(mages), 2)
+    maximum_power: int = max(mages, key=lambda z: z["power"])["power"]
+    useless_mage: int = min(mages, key=lambda u: u["power"])["power"]
+    quick_math: int = sum(map(lambda s: s["power"], mages))
+    avg: float = round(quick_math / len(mages), 2)
 
     return {
         "max_power": maximum_power,
@@ -23,35 +23,35 @@ def mage_stats(mages: list[dict]) -> dict:
         }
 
 
-def main():
-    artifact = [
+def main() -> None:
+    artifact: list[dict[str, str | int]] = [
         {"name": "Crystal Orb", "power": 85},
         {"name": "Fire Staff", "power": 92}
     ]
 
-    sorted_artifacts = artifact_sorter(artifact)
+    sorted_artifacts: list[dict[str, str | int]] = artifact_sorter(artifact)
     print("\nTesting artifact sorter...")
     print(f"{sorted_artifacts[0]['name']} \
 ({sorted_artifacts[0]['power']} power) comes before \
 {sorted_artifacts[1]['name']} ({sorted_artifacts[1]['power']} power)")
 
     print("\nTesting spell transformer...")
-    spells = [
+    spells: list[str] = [
         "fireball",
         "heal",
         "shield"
     ]
-    transformed_spells = spell_transformer(spells)
+    transformed_spells: list[str] = spell_transformer(spells)
     print(f"{transformed_spells[0]}{transformed_spells[1]}\
 {transformed_spells[2]}")
 
-    mage_list = [
+    mage_list: list[dict[str, str | int]] = [
         {"name": "Veigar", "power": 1081},
         {"name": "Skidoodle", "power": 1000},
         {"name": "Peter the mage", "power": 0}
         ]
 
-    mage_rank = mage_stats(mage_list)
+    mage_rank: dict[str, int | float] = mage_stats(mage_list)
     print("\nTesting mage ranking...")
     print(f"Most Powerful Mage: {mage_rank['max_power']}")
     print(f"Most useless mage of all time: {mage_rank['min_power']}")

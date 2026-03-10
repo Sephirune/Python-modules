@@ -1,5 +1,6 @@
 from functools import wraps
 import time
+from typing import Any
 
 
 def spell_timer(func: callable) -> callable:
@@ -18,9 +19,9 @@ def spell_timer(func: callable) -> callable:
 
 
 def power_validator(min_power: int) -> callable:
-    def cast_spell(func):
+    def cast_spell(func: callable) -> callable:
         @wraps(func)
-        def wrapper(self, spell_name, power):
+        def wrapper(self: Any, spell_name: str, power: int):
             if power < min_power:
                 return "Insufficient power for this spell"
             else:
@@ -32,9 +33,9 @@ def power_validator(min_power: int) -> callable:
 
 
 def retry_spell(max_attempts: int) -> callable:
-    def decorator(func):
+    def decorator(func: callable):
         @wraps(func)
-        def wrapper(*args, **kwargs) -> str:
+        def wrapper(*args: Any, **kwargs: Any) -> str:
             for attempt in range(1, max_attempts):
                 try:
                     return func(*args, **kwargs)
@@ -63,15 +64,15 @@ class MageGuild:
         return f"Successfully cast {spell_name} with {power} power"
 
 
-def main():
+def main() -> None:
     print("Testing spell timer...")
 
     @spell_timer
-    def fireball():
+    def fireball() -> str:
         time.sleep(0.1)
         return "Fireball cast!"
 
-    result = fireball()
+    result: str = fireball()
     print(f"Result: {result}\n")
 
     print("Testing MageGuild...")
