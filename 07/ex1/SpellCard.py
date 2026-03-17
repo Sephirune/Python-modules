@@ -26,4 +26,3 @@ class SpellCard(Card):
         info['type'] = 'Spell'
         info['effect_type'] = self.effect_type
         return info
-    
