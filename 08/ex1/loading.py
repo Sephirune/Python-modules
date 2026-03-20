@@ -1,24 +1,23 @@
 import importlib
-from types import ModuleType
 
 
-requirements: list[str] = [
+requirements: list = [
     "pandas",
     "matplotlib",
     "numpy",
 ]
 
 
-def checker() -> dict[str, ModuleType]:
+def checker() -> list:
     print("LOADING STATUS: Loading programs...\n")
     print("Checking dependencies:")
 
-    loaded_modules: dict[str, ModuleType] = {}
+    loaded_modules: dict = {}
 
     for pkg in requirements:
         try:
-            module: ModuleType = importlib.import_module(pkg)
-            version: str = getattr(module, "__version__", "unknown_ver")
+            module = importlib.import_module(pkg)
+            version = getattr(module, "__version__", "unknown_ver")
             print(f"[OK] {pkg} ({version}) - ready")
             loaded_modules[pkg] = module
 
@@ -42,10 +41,19 @@ def analyze_matrix() -> None:
     df = pd.DataFrame({"matrix_signal": data})
 
     plt.style.use("dark_background")
-    plt.hist(df["matrix_signal"], bins=30, color='lime')
+    plt.hist(df["matrix_signal"], bins=30, color="#DF346D")
     plt.title("Matrix data signal analysis")
     plt.xlabel('Signal')
     plt.ylabel('Frequency')
+    plt.text(
+        x=0,
+        y=20,
+        s="SLAY",
+        fontsize=100,
+        color="#FFFB00",
+        ha="center",
+        va="center"
+    )
     plt.savefig("matrix_analysis.png")
     plt.show()
 
@@ -54,11 +62,12 @@ def analyze_matrix() -> None:
 
 
 def main() -> None:
-    modules = checker()
+    modules: list = checker()
     if len(modules) < len(requirements):
         return
 
     analyze_matrix()
 
 
-main()
+if __name__ == "__main__":
+    main()

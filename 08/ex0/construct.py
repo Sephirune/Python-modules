@@ -27,8 +27,8 @@ def sys_info() -> None:
 
 
 def in_env() -> None:
-    env_path: str = sys.prefix
-    env_name: str = os.path.basename(sys.prefix)
+    env_path = sys.prefix
+    env_name = os.path.basename(sys.prefix)
     print("MATRIX STATUS: Welcome to the construct\n")
     print(f"Current Python: {sys.executable}")
     print(f"Virtual Environment: {env_path}")
@@ -41,7 +41,7 @@ def in_env() -> None:
         )
 
     print("Package installation path:")
-    path: list[str] = site.getsitepackages()
+    path = site.getsitepackages()
     print(path[0])
 
 
@@ -52,4 +52,5 @@ def main() -> None:
         sys_info()
 
 
-main()
+if __name__ == "__main__":
+    main()

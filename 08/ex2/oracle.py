@@ -20,7 +20,7 @@ def load_conf() -> dict[str, str | None]:
 def validate_conf(config) -> bool:
     print("Configuration loaded:")
 
-    warning = False
+    warning: bool = False
     for key, value in config.items():
         if not value:
             print(f"[WARNING] {key} is not configured")
