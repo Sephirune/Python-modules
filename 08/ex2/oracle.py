@@ -7,7 +7,7 @@ def load_conf() -> dict[str, str | None]:
     print("ORACLE STATUS: Reading the Matrix...\n")
     load_dotenv()  # Carga el archivo env
 
-    config: dict[str, str | None] = {
+    config = {
         "Mode": os.getenv("MATRIX_MODE"),
         "Database": os.getenv("DATABASE_URL"),
         "API Access": os.getenv("API_KEY"),
@@ -17,10 +17,10 @@ def load_conf() -> dict[str, str | None]:
     return config
 
 
-def validate_conf(config: dict[str, str | None]) -> bool:
-    print("Configuration loaded:\n")
+def validate_conf(config) -> bool:
+    print("Configuration loaded:")
 
-    warning: bool = False
+    warning = False
     for key, value in config.items():
         if not value:
             print(f"[WARNING] {key} is not configured")
@@ -33,8 +33,8 @@ def validate_conf(config: dict[str, str | None]) -> bool:
     return True
 
 
-def status(config: dict[str, str | None]) -> None:
-    print(f"Mode: {config['Matrix_Mode']}")
+def status(config) -> None:
+    print(f"Mode: {config['Mode']}")
 
     if config["Mode"] == "development":
         print("Database: Connected to local instance")
@@ -46,7 +46,7 @@ def status(config: dict[str, str | None]) -> None:
     else:
         print("Api Acess: Missing Key")
 
-    print(f"Log level: {config['log level']}")
+    print(f"Log level: {config['Log Level']}")
 
     if config["Zion Network"]:
         print("Zion Network: Online")
@@ -67,14 +67,14 @@ def checker() -> None:
 
 
 def main() -> None:
-    config: dict[str, str | None] = load_conf()
+    config = load_conf()
 
     if not validate_conf(config):
         print("\nPlease configure your environment variables.")
         sys.exit(1)
 
     status(config)
-    checker
+    checker()
     print("\nThe Oracle sees all configurations.")
 
 
