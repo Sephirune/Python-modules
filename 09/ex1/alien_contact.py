@@ -6,8 +6,8 @@ from typing import Optional
 
 class ContactType(str, Enum):
     radio = "radio"
-    visual = "visual",
-    physical = "physical",
+    visual = "visual"
+    physical = "physical"
     telepathic = "telepathic"
 
 
@@ -37,13 +37,13 @@ witnesses")
         return self
 
 
-def main() -> None:
+def main():
     print(
         'Alien Contact Log Validation',
         '\n======================================',
         '\nValid contact report:'
     )
-    contact = AlienContact(
+    contact: AlienContact = AlienContact(
         contact_id="AC_2024_001",
         timestamp="2026-03-06",
         location="Area 51, Nevada",
@@ -51,7 +51,7 @@ def main() -> None:
         signal_strength=8.5,
         duration_minutes=45,
         witness__count=5,
-        message_received="'Greetings from Zeta Reticuli"
+        message_received="'Greetings from Zeta Reticuli'"
     )
     print(f"ID: {contact.contact_id}",
           f"\nType: {contact.contact_type}",
@@ -71,7 +71,7 @@ def main() -> None:
             signal_strength=8.5,
             duration_minutes=45,
             witness__count=5,
-            message_received="'Greetings from Zeta Reticuli"
+            message_received="'Greetings from Zeta Reticuli'"
             )
     except ValidationError as e:
         print("Expected validation error")
