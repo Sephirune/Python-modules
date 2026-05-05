@@ -7,7 +7,7 @@ def power_filter(mages: list[dict], min_power: int) -> list[dict]:
 
 
 def spell_transformer(spells: list[str]) -> list[str]:
-    return list(map(lambda y: f"* {y} *", spells))
+    return list(map(lambda y: f"* {y} * ", spells))
 
 
 def mage_stats(mages: list[dict]) -> dict:
@@ -20,7 +20,7 @@ def mage_stats(mages: list[dict]) -> dict:
         "max_power": maximum_power,
         "min_power": useless_mage,
         "avg_power": avg
-        }
+    }
 
 
 def main() -> None:
@@ -49,7 +49,7 @@ def main() -> None:
         {"name": "Veigar", "power": 1081},
         {"name": "Skidoodle", "power": 1000},
         {"name": "Peter the mage", "power": 0}
-        ]
+    ]
 
     mage_rank: dict[str, int | float] = mage_stats(mage_list)
     print("\nTesting mage ranking...")

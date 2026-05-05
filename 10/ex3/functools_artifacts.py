@@ -1,9 +1,10 @@
 from functools import reduce, partial, lru_cache, singledispatch
 import operator
+from _collections_abc import Callable
 
 
 def spell_reducer(spells: list[int], operation: str) -> int:
-    parse_type: dict[str, callable] = {
+    parse_type: dict[str, Callable] = {
         "add": operator.add,
         "multiply": operator.mul,
         "max": max,
@@ -13,11 +14,11 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     return reduce(parse_type[operation], spells)
 
 
-def partial_enchanter(base_enchantment: callable) -> dict[str, callable]:
+def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
 
-    fire: callable = partial(base_enchantment, 50, "fire")
-    ice: callable = partial(base_enchantment, 50, "ice")
-    lightning: callable = partial(base_enchantment, 50, "lightning")
+    fire: Callable = partial(base_enchantment, 50, "fire")
+    ice: Callable = partial(base_enchantment, 50, "ice")
+    lightning: Callable = partial(base_enchantment, 50, "lightning")
 
     return {
         "fire_enchant": fire,
@@ -31,13 +32,13 @@ def memoized_fibonacci(n: int) -> int:
     if n < 2:
         return n
 
-    return memoized_fibonacci(n-1) + memoized_fibonacci(n-2)
+    return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
 
 
-def spell_dispatcher() -> callable:
+def spell_dispatcher() -> Callable:
     @singledispatch
     def spell(value: object) -> str:
-        return "Unknown spell"
+        return "Unknown spell type"
 
     @spell.register
     def _(value: int) -> str:
@@ -49,7 +50,7 @@ def spell_dispatcher() -> callable:
 
     @spell.register
     def _(value: list) -> str:
-        return f"Multi-cast: {value}"
+        return f"Multi-cast: {len(value)} spells"
 
     return spell
 
@@ -68,11 +69,22 @@ def main() -> None:
 
     print("\nTesting memoized fibonacci...")
 
-    fibo: int = memoized_fibonacci(10)
-    fibo2: int = memoized_fibonacci(15)
+    fibo: int = memoized_fibonacci(0)
+    fibo2: int = memoized_fibonacci(1)
+    fibo3: int = memoized_fibonacci(10)
+    fibo4: int = memoized_fibonacci(15)
 
     print(f"Fib(10): {fibo}")
     print(f"Fib(15): {fibo2}")
+    print(f"Fib(10): {fibo3}")
+    print(f"Fib(10): {fibo4}")
+
+    print("\nTesting spell dispatcher...")
+    dispatch: Callable = spell_dispatcher()
+    print(f"{dispatch(42)} damage")
+    print(dispatch("fireball"))
+    print(dispatch(["fire", "ice", "lightning"]))
+    print(dispatch(0.5))
 
 
 if __name__ == "__main__":

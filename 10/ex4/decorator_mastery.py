@@ -1,9 +1,10 @@
 from functools import wraps
+from collections.abc import Callable
 import time
 from typing import Any
 
 
-def spell_timer(func: callable) -> callable:
+def spell_timer(func: Callable) -> Callable:
     @wraps(func)
     def wrapper(*args, **kwargs):
         print(f"Casting {func.__name__}...")
@@ -18,8 +19,8 @@ def spell_timer(func: callable) -> callable:
     return wrapper
 
 
-def power_validator(min_power: int) -> callable:
-    def cast_spell(func: callable) -> callable:
+def power_validator(min_power: int) -> Callable:
+    def cast_spell(func: Callable) -> Callable:
         @wraps(func)
         def wrapper(self: Any, spell_name: str, power: int):
             if power < min_power:
@@ -32,11 +33,11 @@ def power_validator(min_power: int) -> callable:
     return cast_spell
 
 
-def retry_spell(max_attempts: int) -> callable:
-    def decorator(func: callable):
+def retry_spell(max_attempts: int) -> Callable:
+    def decorator(func: Callable):
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> str:
-            for attempt in range(1, max_attempts):
+            for attempt in range(1, max_attempts + 1):
                 try:
                     return func(*args, **kwargs)
                 except Exception:
@@ -75,7 +76,20 @@ def main() -> None:
     result: str = fireball()
     print(f"Result: {result}\n")
 
-    print("Testing MageGuild...")
+    @retry_spell(3)
+    def unstable_spell() -> str:
+        raise RuntimeError("Spell unstable!")
+
+    failed_result: str = unstable_spell()
+    print(failed_result)
+
+    @retry_spell(3)
+    def waaagh() -> str:
+        return "Waaaaaaagh spelled !"
+
+    print(waaagh())
+
+    print("\nTesting MageGuild...")
     guild = MageGuild()
     print(guild.validate_mage_name("Merlin"))
     print(guild.validate_mage_name("Al"))
